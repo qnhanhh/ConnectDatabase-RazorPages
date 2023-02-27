@@ -1,0 +1,44 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ConnectDatabase.Pages.OrderModel
+@{
+}
+
+<div>
+    <div>
+        <h3>Profile management</h3>
+        <a asp-route-id="profile">Personal Information</a>
+    </div>
+
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Order Date</th>
+                    <th>Required Date</th>
+                    <th>Shipped Date</th>
+                    <th>Freight</th>
+                    <th>Ship Address</th>
+                    <th>Ship City</th>
+                    <th>Ship Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Orders)
+                {
+                    <tr>
+                        <td>@item.OrderId</td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.RequiredDate</td>
+                        <td>@item.ShippedDate</td>
+                        <td>@item.Freight</td>
+                        <td>@item.ShipAddress</td>
+                        <td>@item.ShipCity</td>
+                        <td>@item.ShipCountry</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

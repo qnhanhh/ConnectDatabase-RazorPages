@@ -1,0 +1,118 @@
+﻿@page
+@using ConnectDatabase.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ConnectDatabase.Pages.DashboardModel
+@{
+}
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</head>
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-3">
+            <h1>Dashboard</h1>
+            <ul class="list-group">
+                <a asp-route-id="categories" class="text-decoration-none">
+                <li class="list-group-item">
+                    Categories
+                </li>
+                </a>
+                <a asp-route-id="products" class="text-decoration-none">
+                <li class="list-group-item">
+                    Products
+                </li>
+                </a>
+                <a asp-route-id="customers" class="text-decoration-none">
+                <li class="list-group-item">
+                    Customers
+                </li>
+                </a>
+                <a asp-route-id="orders" class="text-decoration-none">
+                <li class="list-group-item">
+                    Orders
+                </li>
+                </a>
+                <a asp-route-id="revenue" class="text-decoration-none">
+                <li class="list-group-item">
+                    Revenue
+                </li>
+                </a>
+            </ul>
+        </div>
+
+        <div class="col-9">
+            <h1>Management</h1>
+            @if (Model.Categories != null)
+            {
+                <h3>Total categories: @ViewBag.totalCat</h3>
+                @foreach (var item in Model.Categories)
+                {
+                    <h6>@item.CategoryName</h6>
+                    <p>@item.Description</p>
+                    <a asp-page="./Index" asp-route-id="@item.CategoryId" style="margin: 0">View products</a>
+                }
+            }
+            @if (Model.Products != null)
+            {
+                <h3>Total products: @ViewBag.totalProducts</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Units In Stock</th>
+                            <th>Units On Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Products)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.UnitPrice</td>
+                                <td>@item.UnitsInStock</td>
+                                <td>@item.UnitsOnOrder</td>
+                                <a asp-page="./Detail" asp-route-id="@item.ProductId" style="margin:0">Detail</a>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+            @if (Model.Customers != null)
+            {
+                <h3>Total customers: @ViewBag.totalCustomers</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Customers)
+                        {
+                            <tr>
+                                <td>@item.ContactName</td>
+                                <td>@item.ContactTitle</td>
+                                <td>@item.CompanyName</td>
+                                <td>@item.Address</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+            @if (Model.Orders != null)
+            {
+                <h3>Total orders: @ViewBag.totalOrders</h3>
+                @foreach (var item in Model.Orders)
+                {
+                    <h6>@item.OrderDate</h6>
+                }
+            }
+        </div>
+    </div>
+</div>

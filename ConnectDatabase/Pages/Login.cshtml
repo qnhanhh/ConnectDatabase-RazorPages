@@ -1,0 +1,33 @@
+﻿@page
+@using ConnectDatabase.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ConnectDatabase.Pages.LoginModel
+@{
+}
+
+<div>
+    <form action="" method="post">
+        @{
+            if (ViewData["msg"] != null)
+            {
+                <label>@ViewData["msg"]</label>
+                <br />
+            }
+        }
+
+        Email:
+        <input asp-for="@Model.account.Email" type="email" /><br />
+        <span asp-validation-for="@Model.account.Email"></span><br />
+
+        Password:
+        <input asp-for="@Model.account.Password" type="password" /><br />
+        <span asp-validation-for="@Model.account.Password"></span><br />
+
+        <div>
+            <input type="submit" value="Sign In" />
+            <a href="">Sign Up</a>
+        </div>
+    </form>
+</div>
+
+
